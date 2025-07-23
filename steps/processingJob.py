@@ -7,6 +7,8 @@ bucket = "titanicdataset3"
 s3_input_path = "s3://titanicdataset3/titanic.csv"
 role = get_execution_role()
 
+# Create a SKLearnProcessor for preprocessing the Titanic dataset
+# Can be changed to ScriptProcessor if using a different framework or bringing your own container
 sklearn_processor = SKLearnProcessor(
     framework_version="1.2-1",
     role=role,

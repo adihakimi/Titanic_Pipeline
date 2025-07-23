@@ -22,8 +22,9 @@ def preprocessing(file_path, train_output, test_output):
 
     df_train, df_test = train_test_split(df, test_size=TEST_SIZE, random_state=RANDOM_STATE)
 
+
     df_train.to_csv(f"{train_output}/train.csv", index=False)
-    df_test.to_csv(f"{test_output}/train.csv", index=False)
+    df_test.to_csv(f"{test_output}/test.csv", index=False)
 
 
     print(f"Training data saved to {train_output}")
@@ -34,8 +35,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-data", type=str, default=DATASET, help="Path to the Titanic dataset CSV file")
-    parser.add_argument("--train-output", type=str, default="/Users/adihakimi/train", help="Path to save the training dataset")
-    parser.add_argument("--test-output", type=str, default="/Users/adihakimi/test", help="Path to save the testing dataset")
+    parser.add_argument("--train-output", type=str, default="/Users/adihakimi", help="Path to save the training dataset")
+    parser.add_argument("--test-output", type=str, default="/Users/adihakimi", help="Path to save the testing dataset")
     args = parser.parse_args()
 
     preprocessing(args.input_data, args.train_output, args.test_output)

@@ -2,7 +2,8 @@ import boto3
 import sagemaker
 from sagemaker.workflow.parameters import ParameterString
 from sagemaker.workflow.pipeline import Pipeline
-from steps.preprocessing_step import get_preprocessing_step
+from steps.processingJob import get_preprocessing_step
+from steps.trainingJob import get_training_step
 
 # Init
 session = sagemaker.Session()
@@ -25,10 +26,17 @@ preprocessing_step = get_preprocessing_step(
     prefix=prefix
 )
 
+training_step = get_training_step(
+    role=role,
+    sagemaker_session=session,
+    bucket=bucket,
+    prefix=prefix
+)
+
 # Create the pipeline
 pipeline = Pipeline(
     name="TitanicPipeline",
     parameters=[input_data_param],
-    steps=[preprocessing_step],
+    steps=[preprocessing_step, training_step], 
     sagemaker_session=session
 )

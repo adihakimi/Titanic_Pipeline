@@ -24,7 +24,7 @@ def train(train_data, test_data, model_path):
     model = LogisticRegression(max_iter=1000)
     model.fit(X_train, y_train)
 
-    preds = model.predict(X_test)
+    preds = model.predict(X_test) #the test dataset is not really needed here 
     acc = accuracy_score(y_test,preds)
     print(f"Test Accuracy: {acc:.4f}")
 
@@ -36,6 +36,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--train-data', type=str, default='/opt/ml/input/data/train')
     parser.add_argument('--test-data', type=str, default='/opt/ml/input/data/test')
-    parser.add_argument('--model-dir', type=str, default='/opt/ml/model')
+    parser.add_argument('--model-dir', type=str, default='/opt/ml/model') #this path is important for SageMaker to place it in s3 bucket
     args = parser.parse_args()
     train(args.train_data, args.test_data, args.model_dir)

@@ -12,7 +12,8 @@ def get_training_step(role, sagemaker_session, bucket, prefix):
         instance_type="ml.m5.large",
         instance_count=1,
         base_job_name="titanic-training",
-        sagemaker_session=sagemaker_session
+        sagemaker_session=sagemaker_session,
+        output_path=f"s3://{bucket}/{prefix}/models/",
     )
 
     train_input = TrainingInput(

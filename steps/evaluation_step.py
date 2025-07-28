@@ -18,9 +18,7 @@ def get_evaluation_step(role, sagemaker_session, model_uri, test_data_uri, desti
         inputs=[
             ProcessingInput(source=model_uri, destination="/opt/ml/processing/model"),
             ProcessingInput(source=test_data_uri, destination="/opt/ml/processing/input/test"),
-            ProcessingInput(source=destination, source="/opt/ml/processing/output"),
-        
-            
+            ProcessingInput(source=destination, source="/opt/ml/processing/output"),    
         ],
         outputs=[
             ProcessingOutput(output_name="evaluation_report", source="/opt/ml/processing/output"),

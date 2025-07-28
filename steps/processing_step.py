@@ -3,6 +3,7 @@ from sagemaker.sklearn.processing import SKLearnProcessor
 from sagemaker.processing import ProcessingInput, ProcessingOutput
 from sagemaker.workflow.steps import ProcessingStep
 
+
 def get_preprocessing_step(role, input_data_param, sagemaker_session, bucket, prefix):
     processor = SKLearnProcessor(
         framework_version="1.2-1",
@@ -34,7 +35,12 @@ def get_preprocessing_step(role, input_data_param, sagemaker_session, bucket, pr
                 destination=f"s3://{bucket}/{prefix}/data/processed/test"
             )
         ],
-        code=os.path.join("processing", "preprocessing.py")
+        code=os.path.join("preprocessing", "preprocessing.py"),
+        job_arguments=[
+            "--input-data", "/opt/ml/processing/input/titanic.csv", #might be removed in the future
+            "--train-output", "/opt/ml/processing/train", #might be removed in the future
+            "--test-output", "/opt/ml/processing/test" #might be removed in the future
+        ]
     )
 
     return step
